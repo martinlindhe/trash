@@ -21,12 +21,12 @@ func main() {
 	}
 
 	if *recursePtr {
-		// NOOP, since we move root folder...
+		// NOOP, since we just move each argument
 		os.Exit(1)
 	}
 
 	if len(flag.Args()) < 1 {
-		fmt.Printf("Usage: trash <file>\n")
+		fmt.Printf("Usage: trasher <file>\n")
 	}
 
 	args := flag.Args()
