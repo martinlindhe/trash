@@ -1,38 +1,30 @@
 package main
 
 import (
-	"flag"
 	"fmt"
 	"os"
+
+	"gopkg.in/alecthomas/kingpin.v2"
 
 	"github.com/martinlindhe/trasher/osx"
 )
 
+var (
+	files   = kingpin.Arg("files", "Files to remove.").Strings()
+	verbose = kingpin.Flag("verbose", "Verbose mode.").Short('v').Bool()
+	recurse = kingpin.Flag("recurse", "Recurse (noop)").Short('r').Bool()
+	force   = kingpin.Flag("force", "Force (noop)").Short('f').Bool()
+)
+
 func main() {
 
-	forcePtr := flag.Bool("f", false, "force (noop)")
-	recursePtr := flag.Bool("r", false, "recurse (noop)")
-	verbosePtr := flag.Bool("v", false, "verbose")
-	flag.Parse()
+	// support -h for --help
+	kingpin.CommandLine.HelpFlag.Short('h')
+	kingpin.Parse()
 
-	if *forcePtr {
-		// NOOP
-	}
+	for _, f := range *files {
 
-	if *recursePtr {
-		// NOOP, since we just move each argument
-		os.Exit(1)
-	}
-
-	if len(flag.Args()) < 1 {
-		fmt.Printf("Usage: trasher <file>\n")
-	}
-
-	args := flag.Args()
-
-	for _, arg := range args {
-
-		err := osx.Trash(arg, *verbosePtr)
+		err := osx.Trash(f, *verbose)
 		if err != nil {
 			fmt.Println(err)
 			os.Exit(1)

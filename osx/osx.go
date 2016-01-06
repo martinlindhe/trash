@@ -15,7 +15,7 @@ func TrashPath() string {
 func Trash(fileName string, verbose bool) error {
 
 	if !fileExists(fileName) {
-		fmt.Printf("File not found: %s\n", fileName)
+		return fmt.Errorf("File not found: %s\n", fileName)
 	}
 
 	trashPath := TrashPath()
