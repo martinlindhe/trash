@@ -6,19 +6,19 @@ import (
 	"path/filepath"
 )
 
-// TrashPath returns the path of the current user's trash
-func TrashPath() string {
+// trashPath returns the path of the current user's trash
+func trashPath() string {
 	return filepath.Join(os.Getenv("HOME"), ".Trash")
 }
 
-// Trash moves a file to the user's trash folder
+// Trash moves a file to the trash folder
 func Trash(fileName string, verbose bool) error {
 
 	if !fileExists(fileName) {
 		return fmt.Errorf("File not found: %s\n", fileName)
 	}
 
-	trashPath := TrashPath()
+	trashPath := trashPath()
 	baseName := filepath.Base(fileName)
 	dstName := filepath.Join(trashPath, baseName)
 
