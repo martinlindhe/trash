@@ -6,7 +6,7 @@ A move-file-to-trash for the OSX command line, written in Go
 # Install
 
 ```
-go install github.com/martinlindhe/trasher
+go get -u github.com/martinlindhe/trasher
 ```
 
 
