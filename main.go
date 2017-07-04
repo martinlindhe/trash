@@ -6,7 +6,7 @@ import (
 
 	"gopkg.in/alecthomas/kingpin.v2"
 
-	"github.com/martinlindhe/trasher/osx"
+	"github.com/martinlindhe/trasher/lib"
 )
 
 var (
@@ -22,9 +22,13 @@ func main() {
 	kingpin.CommandLine.HelpFlag.Short('h')
 	kingpin.Parse()
 
-	for _, f := range *files {
+	if len(*files) == 0 {
+		fmt.Println("error: argument required, see --help")
+		os.Exit(1)
+	}
 
-		err := osx.Trash(f, *verbose)
+	for _, f := range *files {
+		err := lib.Trash(f, *verbose)
 		if err != nil {
 			fmt.Println(err)
 			os.Exit(1)

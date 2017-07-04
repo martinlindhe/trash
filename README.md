@@ -1,6 +1,6 @@
 # About
 
-A move-file-to-trash for the OSX command line, written in Go
+A move-file-to-trash for the macOS and Linux command line
 
 
 # Install
